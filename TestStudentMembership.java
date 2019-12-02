@@ -5,7 +5,7 @@ import java.text.ParseException;
 import java.util.Scanner;
 
 public class TestStudentMembership {
-    public static void main(String [] args) throws ParseException {
+    public static void main(String[] args) throws ParseException {
         Scanner keyboard = new Scanner(System.in);
 
         //creating simple date format object
@@ -17,11 +17,9 @@ public class TestStudentMembership {
 
 
         //creating new student memberships
-        StudentMembership student1 = new StudentMembership("Student", "Billy Stewart", "15/4/94", "3 Drumcliff", "Bs@ulster.ac.uk", "Ulster", sdfo.parse("21-06-2020"));
+        StudentMembership student1 = new StudentMembership("Student", "Billy Stewart", "15/4/94", "3 Drumcliff", "Bs@ulster.ac.uk", "Ulster", sdfo.parse("21-06-2020"), "Password");
 
-        StudentMembership student2 = new StudentMembership("Student", "Matthew McCafferty", "21/02/1993", "15 Square Street", "Matt@ulster.ac.uk", "Ulster", sdfo.parse("21-06-2018"));
-
-
+        StudentMembership student2 = new StudentMembership("Student", "Matthew McCafferty", "21/02/1993", "15 Square Street", "Matt@ulster.ac.uk", "Ulster", sdfo.parse("21-06-2018"), "Password");
 
 
         //creating student 4
@@ -40,21 +38,22 @@ public class TestStudentMembership {
         university = keyboard.nextLine();
         System.out.println("Graduation Date: ");
         gradDate = keyboard.nextLine();
-        StudentMembership student4 = new StudentMembership(type, name, dob, address, email, university, sdfo.parse(gradDate));
-
+        System.out.println("Password: ");
+        password = keyboard.nextLine();
+        StudentMembership student3 = new StudentMembership(type, name, dob, address, email, university, sdfo.parse(gradDate), password);
 
 
         //printing out student memberships
         System.out.println(student1);
         System.out.println(student2);
-        System.out.println(student4);
+        System.out.println(student3);
 
         //testing getID and getStatus
         System.out.println("The status of member " + student1.getID() + " is " + student1.getStatus());
 
+        student3.logIn();
 
-
-
+        student3.chooseGymClasses();
 
     }//main
 }//class

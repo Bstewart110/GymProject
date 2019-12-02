@@ -1,26 +1,34 @@
 package GroupProject;
 
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.Scanner;
+
 abstract public class Membership {
 
+    DecimalFormat df = new DecimalFormat("00.00");
+    Scanner keyboard = new Scanner(System.in);
+
     //instance variables
-    private String type;  //student or adult membership
-    private String name;
+    String type;  //student or adult membership
+    String name;
     private String DOB;
     private String address;
     private String email;
-    private double cost;
+
+    final double COST = 30.00;
 
     public Membership () {
     }//default constructor
 
-    public Membership(String mType, String mName, String mDOB, String mAddress, String mEmail, double mCost){
+    public Membership(String mType, String mName, String mDOB, String mAddress, String mEmail){
         type = mType;
         name = mName;
         DOB = mDOB;
         address = mAddress;
         email = mEmail;
-        cost = mCost;
     }//alternate constructor
+
 
 
     //set and Get methods
@@ -64,20 +72,66 @@ abstract public class Membership {
         return email;
     }//getEmail
 
-    protected void setCost(double mCost){
-        cost = mCost;
-    }//setCost
 
-    protected double getCost(){
-        return cost;
-    }//getCost
+
 
     //Abstract method to be defined in Subclasses
     abstract protected String getStatus();
 
-    public String toString() {
-        return ("Name: \t\t" + name);
-    }//toString
+    abstract public String toString();
+    //abstract toString
+
+    abstract protected void logIn();
+    //abstract login method
+
+
+
+    protected void chooseGymClasses() {
+
+        String [] gymClasses = {"Spin class", "Circuits", "Yoga", "Zumba"};
+
+        String chosenClass = "";
+        int choice;
+        do {
+            System.out.println("\n1.  Spin");
+            System.out.println("2.  Circuits");
+            System.out.println("3.  Yoga");
+            System.out.println("4.  Zumba");
+            System.out.println("5.  Exit");
+            System.out.print("\nPlease enter your choice: ");
+            choice = keyboard.nextInt();
+            switch (choice) {
+                case 1:
+                    chosenClass = gymClasses[0];
+                    System.out.println("You have choosen to attend a " + chosenClass + " class\nChoose another class or press 5 to logout");
+                    break;
+                case 2:
+                    chosenClass = gymClasses[1];
+                    System.out.println("You have choosen to attend a " + chosenClass + " class\nChoose another class or press 5 to logout");
+                    break;
+                case 3:
+                    chosenClass = gymClasses[2];
+                    System.out.println("You have choosen to attend a " + chosenClass + " class\nChoose another class or press 5 to logout");
+                    break;
+                case 4:
+                    chosenClass = gymClasses[3];
+                    System.out.println("You have choosen to attend a " + chosenClass + " class\nChoose another class or press 5 to logout");
+                    break;
+                case 5:
+                    System.out.println("You have logged out");
+                    break;
+                default:
+                    System.out.println("invalid Choice");
+
+            }//switch
+
+        } while (choice != 5);
+
+    }//chooseGymClass
+
+
+
+
 
 
 
