@@ -10,39 +10,29 @@ public class StudentMembership extends Membership {
     Scanner keyboard = new Scanner(System.in);
 
     //class variable
-    private static int nextStudentID = 101;
+
     private static int numberOfStudents = 0;
 
     //instance variables
-    private String iDString = "STU";
-    private String studentID;
     private String university;
     private Date graduationDate;
-    private String password;
 
 
     public StudentMembership() {
         super();
-        studentID = iDString + nextStudentID;
-        nextStudentID = nextStudentID + 1;
         numberOfStudents++;
     }//default Constructor
 
-    public StudentMembership(String stuType, String stuName, String stuDOB, String stuAddress, String stuEmail, String stuUniversity, Date stuGraduationDate, String stuPassword) {
-        super(stuType, stuName, stuDOB, stuAddress, stuEmail);
+    public StudentMembership( String stuType, String stuName, String stuDOB, String stuAddress, String stuEmail, String stuUniversity, Date stuGraduationDate, String stuChosenClass) {
+        super(stuType, stuName, stuDOB, stuAddress, stuEmail, stuChosenClass);
         university = stuUniversity;
         graduationDate = stuGraduationDate;
-        studentID = iDString + nextStudentID;
-        password = stuPassword;
-        nextStudentID = nextStudentID + 1;
         numberOfStudents++;
     }//alternate Constructor
 
 
     //get and set methods
-    protected String getID() {
-        return studentID;
-    }//getID
+
 
     protected void setUniversity(String uni) {
         university = uni;
@@ -56,6 +46,7 @@ public class StudentMembership extends Membership {
         return type;
     }//getStatus
 
+
     @Override
     public String toString() {
         String message;
@@ -65,18 +56,19 @@ public class StudentMembership extends Membership {
 
         double studentCost;
         if (expiry.before(today)) {
-            studentCost = COST;
+            studentCost = cost;
         }//if
         else {
-            studentCost = COST - (COST * 0.10);
+            studentCost = cost - (cost * 0.10);
         }//else
 
-        message = studentID + "'s Membership Details\n" +
+        message = name + "'s pass Details\n" +
                 "===============================\n" +
                 "Name:\t\t\t\t" + name + "\n" +
-                "MembershipID:\t\t" + studentID + "\n" +
+                "MembershipID:\t\t" + memberID + "\n" +
                 "Type of membership:\t" + type + "\n" +
-                "Cost:\t\t\t\t" + df.format(studentCost) + "\n";
+                "Cost:\t\t\t\t" + df.format(studentCost) + "\n" +
+                "You have chosen to attend a " + classChosen + " class today with " + "\n";
         if (expiry.before(today)) {
             message = message + "This student discount has expired\n";
         } else {
@@ -92,35 +84,5 @@ public class StudentMembership extends Membership {
     }//numberOfStudents
 
 
-    protected void logIn() {
 
-        System.out.println("Enter login username: ");
-        String usernameAttempt = keyboard.nextLine();
-
-        System.out.println("Enter password: ");
-        String passwordAttempt = keyboard.nextLine();
-
-
-        do {
-            if (usernameAttempt.equals(studentID) && (passwordAttempt.equals(password))) {
-                System.out.println("Log in successful");
-            }//if
-            else {
-                if ((usernameAttempt.equals(studentID)) || (passwordAttempt.equals(password))) {
-                    System.out.println("Incorrect Username or Password!");
-                    System.out.println("Try again");
-                }//if
-                System.out.println("Enter login username: ");
-                usernameAttempt = keyboard.nextLine();
-
-                System.out.println("Enter password: ");
-                passwordAttempt = keyboard.nextLine();
-                System.out.println("Log in successful");
-            }//else
-
-        }
-        while (((!usernameAttempt.equals(studentID) || (!passwordAttempt.equals(password))))) ;
-
-
-    }
 }
